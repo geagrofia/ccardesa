@@ -1,0 +1,42 @@
+---
+title: "Climate Relevant Satellite Data"
+author: "A Farrow"
+date: "28/03/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r libraries}
+#library(RPostgres) this conflicts with RPostgreSQL so disable
+library(RPostgreSQL)
+library(DBI)
+library(kableExtra)
+
+```
+
+# Connect to PostgreSQL database
+
+The database has the following tables:
+
+```{r db_connect, results='markup'}
+
+con <- dbConnect(
+  RPostgres::Postgres(),
+  dbname = "ccardesa",
+  host = "localhost",
+  port = "5432",
+  password = "wagb$^6DF",
+  user = "postgres",
+  service = NULL
+)
+
+# List tables associated with a specific schema
+dbGetQuery(con,
+           "SELECT table_name FROM information_schema.tables
+                   WHERE table_schema='public'") %>% kable(caption = "Coverage PostgreSQL Tables") %>% kable_styling("striped", full_width = T)
+
+```
