@@ -39,4 +39,8 @@ dbGetQuery(con,
            "SELECT table_name FROM information_schema.tables
                    WHERE table_schema='public'") %>% kable(caption = "Coverage PostgreSQL Tables") %>% kable_styling("striped", full_width = T)
 
+
+
 ```
+
+
